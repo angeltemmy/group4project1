@@ -6,9 +6,7 @@
 
 The objective of this project is to create a data pipeline solution that is capable of looking up accurate location data and assessing security threats originating from risky IP addresses using the IPStack API https://ipstack.com/  to extract geolocation data from IP addresses, transform it to integrate with existing datasets (e.g., standardizing location formats or enriching data with additional geographical attributes), and load it into a target system such as a database. This process enables precise geolocation analysis, enhances data quality, and supports location-based decision-making.
 
-Example:
 
-> The objective of our project is to provide analytical datasets from our Orders API and Customers database.
 
 ## Consumers
 
