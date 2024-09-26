@@ -10,11 +10,31 @@ The objective of this project is to create a data pipeline solution that is capa
 
 ## Consumers
 
-What users would find your data useful? How do they want to access the data?
+Users who would find our datasets useful include:
+
+### 1. **Marketing Teams** 
+   - **Usage**: They can use geolocation data to personalize marketing campaigns based on the user's location.
+   
+
+### 2. **E-commerce Platforms**
+   - **Usage**: To optimize customer experiences by offering location-specific products, services, and delivery estimates.
+  
+
+### 3. **Cybersecurity Teams**
+   - **Usage**: To detect suspicious activity based on anomalous geolocations and strengthen network security.
+ 
+
+### 4. **Business Intelligence (BI) Teams**
+   - **Usage**: For analyzing regional sales, traffic trends, and market performance across different geographical areas.
+
+- **Access**: Typically through database or BI dashboards 
+
+
+
 
 Example:
 
-> The users of our datasets are Data Analysts and the Production team in the business.
+
 
 ## Questions
 
