@@ -13,7 +13,9 @@ from etl_project.connectors.postgresql import PostgreSqlClient
 from etl_project.assets.pipeline_logging import PipelineLogging
 from etl_project.assets.metadata_logging import MetaDataLogging, MetaDataLoggingStatus 
 from etl_project.assets.earthquakes import (
-    extract_earthquakes_data
+    extract_earthquakes_data,
+    transform,
+    load
 )
 
 def run_pipeline(
@@ -74,6 +76,41 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         layer_name=config.get("layer_name")
     )
     print(df_earthquakes.head())
+
+    # transform
+    pipeline_logging.logger.info("Transform dataframes")
+    df_transformed = transform(
+        df=df_earthquakes,
+        selection_list=["type", "id", "properties.place"]
+    )
+    print(df_transformed.head())
+
+    # load
+    pipeline_logging.logger.info("Loading data to postgres")
+    postgresql_client = PostgreSqlClient(
+        server_name=SERVER_NAME,
+        database_name=DATABASE_NAME,
+        username=DB_USERNAME,
+        password=DB_PASSWORD,
+        port=PORT,
+    )
+    metadata = MetaData()
+    table = Table(
+        f"table_{config.get('table_name')}_data",
+        metadata,
+        Column("type", String),
+        Column("id", String, primary_key=True),
+        Column("properties.place", String)
+    )
+    load(
+        df=df_transformed,
+        postgresql_client=postgresql_client,
+        table=table,
+        metadata=metadata,
+        load_method="upsert"
+    )
+    pipeline_logging.logger.info("Pipeline run successful")
+
 
 if __name__ == "__main__":
     load_dotenv()

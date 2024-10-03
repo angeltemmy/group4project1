@@ -6,6 +6,7 @@ config:
   end_time: "2020-01-10"
   layer_name: "features"
   method: "geojson"
+  table_name: "earthquake"
 schedule:
   run_seconds: 5
   poll_seconds: 2
