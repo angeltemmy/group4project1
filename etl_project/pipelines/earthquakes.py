@@ -123,7 +123,7 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
     )
     metadata = MetaData()
     table = Table(
-        f"table_{config.get('table_name')}_data",
+        f"table_{config.get('table_name')}_1_data",
         metadata,
         Column("type", String),
         Column("id", String, primary_key=True),
@@ -131,15 +131,9 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         Column("properties.title", String),
         Column("properties.time", TIMESTAMP),
         Column("properties.updated", TIMESTAMP),
-        Column("properties.nst", String(500)),
-        Column("properties.dmin", String(500)),
-        Column("properties.rms", String(500)),
-
-        # Column("properties.gap", NUMERIC),
-        # Column("properties.magType", String),
-        # Column("geometry.coordinates", String)
-
-
+        Column("properties.nst", NUMERIC),
+        Column("properties.dmin", NUMERIC),
+        Column("properties.rms", NUMERIC),
 
     )
 
@@ -147,13 +141,10 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         f"table_{config.get('table_name')}_2_data",
         metadata,
         Column("id", String, primary_key=True),
-        Column("properties.mag", String(500)),
+        Column("properties.mag", NUMERIC),
         Column("properties.gap", NUMERIC),
         Column("properties.magType", String),
         Column("geometry.coordinates", String)
-
-
-
     )
     load(
         df=df_transformed_table_1,
