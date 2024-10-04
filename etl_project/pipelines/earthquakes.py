@@ -1,7 +1,7 @@
 # Enviornment Imports
 from dotenv import load_dotenv
 import os
-from sqlalchemy import Table, MetaData, Column, Integer, String, Float
+from sqlalchemy import Table, MetaData, Column, NUMERIC, String, Float, TIMESTAMP, DECIMAL
 import yaml
 from pathlib import Path
 import  time
@@ -75,15 +75,42 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         end_time = config.get("end_time"),
         layer_name=config.get("layer_name")
     )
-    print(df_earthquakes.head())
+    # print(df_earthquakes.head())
 
     # transform
     pipeline_logging.logger.info("Transform dataframes")
-    df_transformed = transform(
+    df_transformed_table_1 = transform(
         df=df_earthquakes,
-        selection_list=["type", "id", "properties.place"]
+        selection_list=
+        ["type", 
+         "id", 
+         "properties.place", 
+         "properties.title",
+         "properties.time",
+         "properties.updated",
+         "properties.nst",
+         "properties.dmin",
+         "properties.rms",
+        #  "properties.mag",
+
+        #  "properties.gap",
+        #  "properties.magType",
+        #  "geometry.coordinates"
+         ]
     )
-    print(df_transformed.head())
+
+    df_transformed_table_2 = transform(
+        df=df_earthquakes,
+        selection_list=
+        [
+         "id",
+         "properties.mag",
+         "properties.gap",
+         "properties.magType",
+         "geometry.coordinates"
+         ]
+    )
+    # print(df_transformed.head())
 
     # load
     pipeline_logging.logger.info("Loading data to postgres")
@@ -100,16 +127,51 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         metadata,
         Column("type", String),
         Column("id", String, primary_key=True),
-        Column("properties.place", String)
+        Column("properties.place", String),
+        Column("properties.title", String),
+        Column("properties.time", TIMESTAMP),
+        Column("properties.updated", TIMESTAMP),
+        Column("properties.nst", String(500)),
+        Column("properties.dmin", String(500)),
+        Column("properties.rms", String(500)),
+
+        # Column("properties.gap", NUMERIC),
+        # Column("properties.magType", String),
+        # Column("geometry.coordinates", String)
+
+
+
+    )
+
+    table2 = Table(
+        f"table_{config.get('table_name')}_2_data",
+        metadata,
+        Column("id", String, primary_key=True),
+        Column("properties.mag", String(500)),
+        Column("properties.gap", NUMERIC),
+        Column("properties.magType", String),
+        Column("geometry.coordinates", String)
+
+
+
     )
     load(
-        df=df_transformed,
+        df=df_transformed_table_1,
         postgresql_client=postgresql_client,
         table=table,
         metadata=metadata,
         load_method="upsert"
     )
-    pipeline_logging.logger.info("Pipeline run successful")
+    pipeline_logging.logger.info("Pipeline run successful Table 1")
+
+    load(
+        df=df_transformed_table_2,
+        postgresql_client=postgresql_client,
+        table=table2,
+        metadata=metadata,
+        load_method="upsert"
+    )
+    pipeline_logging.logger.info("Pipeline run successful Table 2")
 
 
 if __name__ == "__main__":
