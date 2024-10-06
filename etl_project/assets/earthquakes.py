@@ -2,7 +2,7 @@
 import pandas as pd
 from pathlib import Path
 from sqlalchemy import Table, MetaData
-
+from datetime import datetime
 
 
 # Project Imports
@@ -35,7 +35,13 @@ def transform(df: pd.DataFrame, selection_list: list) -> pd.DataFrame:
     """
     Performs transformations on dataframe produced from extract_earthquakes_data() function
     """
-    return df[selection_list]
+    for item in selection_list:
+        if item == 'properties.time' or item == 'properties.updated':
+            df[item] = pd.to_datetime(df[item], unit='ms')
+
+    df = df[selection_list]
+    print(df.head())
+    return df
 
 def load(
     df: pd.DataFrame,
