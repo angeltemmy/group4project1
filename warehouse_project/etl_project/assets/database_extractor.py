@@ -30,8 +30,10 @@ class SqlExtractConfig:
 
 
 class SqlExtractParser:
+    print("here extractor")
     def __init__(self, file_path: Path, environment: Environment):
         self.file_path = file_path
+        print(self.file_path)
         self.environment = environment
         self.template = self.environment.get_template(self.file_path)
         self.config = SqlExtractConfig(**self.template.make_module().config)
