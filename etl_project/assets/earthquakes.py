@@ -40,7 +40,7 @@ def transform(df: pd.DataFrame, selection_list: list) -> pd.DataFrame:
             df[item] = pd.to_datetime(df[item], unit='ms')
 
     df = df[selection_list]
-    print(df.head())
+    # print(df.head())
     return df
 
 def load(
@@ -48,7 +48,7 @@ def load(
     postgresql_client: PostgreSqlClient,
     table: Table,
     metadata: MetaData,
-    load_method: str = "overwrite",
+    load_method: str = "upsert",
 ) -> None:
     """
     Load dataframe to a database.
