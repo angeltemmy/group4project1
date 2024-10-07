@@ -67,3 +67,8 @@ class PostgreSqlClient:
             },
         )
         self.engine.execute(upsert_statement)
+        
+    def execute_sql(self, sql: str) -> None:
+        self.engine.execute(sql)
+
+    

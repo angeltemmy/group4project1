@@ -6,6 +6,10 @@ import yaml
 from pathlib import Path
 import  time
 import schedule
+from graphlib import TopologicalSorter
+from pathlib import Path
+from jinja2 import Environment, FileSystemLoader
+
 
 # Project Imports
 from etl_project.connectors.earthquakes import EarthquakesApiClient
@@ -17,6 +21,11 @@ from etl_project.assets.earthquakes import (
     transform,
     load
 )
+
+from etl_project.assets.extract_transform import (
+    nodeTransform,
+    SqlTransform,
+)    
 
 def run_pipeline(
     pipeline_name: str,
@@ -127,13 +136,15 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         metadata,
         Column("type", String),
         Column("id", String, primary_key=True),
-        Column("properties.place", String),
-        Column("properties.title", String),
-        Column("properties.time", TIMESTAMP),
-        Column("properties.updated", TIMESTAMP),
-        Column("properties.nst", NUMERIC),
-        Column("properties.dmin", NUMERIC),
-        Column("properties.rms", NUMERIC),
+        Column("place", String),
+        Column("title", String),
+        Column("time", TIMESTAMP),
+        Column("updated", TIMESTAMP),
+        Column("nst", NUMERIC),
+        Column("dmin", NUMERIC),
+        Column("rms", NUMERIC),
+        Column("location", String),
+        Column("region", String),
 
     )
 
@@ -141,10 +152,10 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         f"table_{config.get('table_name')}_2_data",
         metadata,
         Column("id", String, primary_key=True),
-        Column("properties.mag", NUMERIC),
-        Column("properties.gap", NUMERIC),
-        Column("properties.magType", String),
-        Column("geometry.coordinates", String)
+        Column("mag", NUMERIC),
+        Column("gap", NUMERIC),
+        Column("magType", String),
+        Column("coordinates", String)
     )
     load(
         df=df_transformed_table_1,
@@ -163,6 +174,46 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         load_method="upsert"
     )
     pipeline_logging.logger.info("Pipeline run successful Table 2")
+
+    transform_template_environment = Environment(
+            loader=FileSystemLoader(
+                pipeline_config.get("config").get("transform_template_path")
+            )
+        )
+
+    # create nodes
+    avg_mag_region = SqlTransform(
+        table_name="avg_mag_region",
+        postgresql_client=postgresql_client,
+        environment=transform_template_environment,
+    )
+    max_mag_region = SqlTransform(
+        table_name="max_mag_region",
+        postgresql_client=postgresql_client,
+        environment=transform_template_environment,
+    )
+
+    region_more_earthquakes = SqlTransform(
+        table_name="region_more_earthquakes",
+        postgresql_client=postgresql_client,
+        environment=transform_template_environment,
+    )
+
+    # create DAG
+    dag = TopologicalSorter()
+    dag.add(avg_mag_region)
+    dag.add(max_mag_region, avg_mag_region)
+    dag.add(region_more_earthquakes,max_mag_region)
+    # run transform
+    pipeline_logging.logger.info("Perform transform")
+    nodeTransform(dag=dag)
+    pipeline_logging.logger.info("Pipeline complete")
+    '''metadata_logging.log(
+        status=MetaDataLoggingStatus.RUN_SUCCESS, logs=pipeline_logging.get_logs()
+    )'''
+    pipeline_logging.logger.handlers.clear()
+ 
+
 
 
 if __name__ == "__main__":

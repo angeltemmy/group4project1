@@ -36,11 +36,38 @@ def transform(df: pd.DataFrame, selection_list: list) -> pd.DataFrame:
     Performs transformations on dataframe produced from extract_earthquakes_data() function
     """
     for item in selection_list:
+       
+
         if item == 'properties.time' or item == 'properties.updated':
             df[item] = pd.to_datetime(df[item], unit='ms')
+        
+         
+        
 
-    df = df[selection_list]
-    print(df.head())
+        df = df[selection_list]
+
+    for item in selection_list:    
+        if item == 'properties.place':
+            df[['location','region','N']] = df['properties.place'].str.split(pat =',',expand = True) 
+            df.drop('N', axis = 1, inplace = True)
+            print(df[['region']])
+            if  df[['region']].empty:
+                print(df[['region']])
+                df[['region']] = df[['location']]
+
+        splitName = item.split('.')
+        if len(splitName) > 1:
+
+        
+            splitName = splitName[1]
+            #print(df.head())
+
+            df = df.rename(columns={item:splitName})
+
+    #df.dropna(subset=['region'])       
+
+    print(df.head(30))
+
     return df
 
 def load(

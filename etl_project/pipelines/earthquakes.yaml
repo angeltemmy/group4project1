@@ -1,6 +1,7 @@
 name: earthquakes
 config:
   base_url: "https://earthquake.usgs.gov/fdsnws/event/1/query" 
+  transform_template_path: "./etl_project/assets/sql/transform"
   log_folder_path: "./etl_project/logs"
   start_time: "2020-01-06"
   end_time: "2020-01-10"
