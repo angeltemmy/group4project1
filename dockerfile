@@ -8,4 +8,4 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "-m", "etl_project.pipelines.earthquakes"]
+CMD ["python", "-m", "etl_project.pipelines.earthquakes"] 
