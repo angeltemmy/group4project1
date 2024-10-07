@@ -1,4 +1,0 @@
-2024-10-03 12:22:54,162 - earthquakes - INFO - Starting pipeline run
-2024-10-03 12:22:54,162 - earthquakes - INFO - Getting ENV variables
-2024-10-03 12:22:54,162 - earthquakes - INFO - Creating Earthquake API client
-2024-10-03 12:22:54,162 - earthquakes - INFO - Extracting data from Earthquake API

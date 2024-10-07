@@ -1,7 +1,0 @@
-2024-10-03 13:58:04,091 - alpaca_markets - INFO - Starting pipeline run
-2024-10-03 13:58:04,095 - alpaca_markets - INFO - Getting pipeline environment variables
-2024-10-03 13:58:04,095 - alpaca_markets - INFO - Creating Alpaca Markets API client
-2024-10-03 13:58:04,095 - alpaca_markets - INFO - Extracting data from Alpaca API and CSV files
-2024-10-03 13:58:05,318 - alpaca_markets - INFO - Transforming dataframes
-2024-10-03 13:58:05,318 - alpaca_markets - INFO - Loading data to postgres
-2024-10-03 13:58:05,661 - alpaca_markets - INFO - Pipeline run successful
