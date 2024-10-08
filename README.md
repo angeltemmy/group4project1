@@ -43,8 +43,8 @@ These are supported by 2 docker containers, along with a 3rd container for the P
   Download PostgreSQL and pgAdmin by going to https://www.postgresql.org/download/ and selecting the installer for your Operating System. Download the latest version of PostgreSQL.
 ### 2. Clone the repo
   Clone the github repository or manually download it.
-### 3. after navgatio to the dicrectory containing the docker-compose file, run 
-<docker compose up>
+### 3. after navigating to the directory containing the docker-compose.yml file, run the following command in terminal: 
+```docker compose up```
   
 AWS Screenshots  
 We use Docker to contain the pipeline, then load it into AWS ECR, and run on ECS.
