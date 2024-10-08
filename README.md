@@ -18,24 +18,19 @@ Users who would find our datasets useful include:
 *  Academic and Research Institutions: To Conduct research on seismic phenomena, geophysics, and earth sciences.
 *  Utility Companies: To Assess risk to critical infrastructure such as power plants, water facilities, and pipelines.
 
-## Value: 
+## Value
 
-Access to real-time and historical data enables accurate reporting and public education.
-• Access: Typically through database or BI dashboards
-Questions
-Our data addresses questions like
-• How many earthquakes occur each day, week, month, and year?
-• Which regions or countries experience the highest frequency of earthquakes?
-• What are the distribution patterns of earthquake magnitudes over time?
-• Which tectonic plate boundaries experience the most seismic activity?  
--What countries or regions have seen a significant increase in earthquake occurrences over time?  
--Which regions have the highest potential risk based on historical earthquake data?  
--How frequently do large magnitude (7.0+) earthquakes occur in high-population areas?  
--What are the economic or infrastructural impacts of earthquakes in high-risk zones?
-These questions and use cases guide the ETL pipeline development, ensuring it delivers the insights and analytics needed by each user group.
-Source datasets
-Primary Dataset: USGS Earthquake Catalog API (https://earthquake.usgs.gov/fdsnws/event/1)
-Description: This dataset provides real-time and historical data on global earthquake events.
+Access to real-time and historical data enables accurate reporting and public education. Typically through database or BI dashboards
+
+## Our data addresses questions like
+*  How many earthquakes occur each day, week, month, and year?
+*  Which regions or countries experience the highest frequency of earthquakes?
+*  What are the distribution patterns of earthquake magnitudes over time?
+*  Which tectonic plate boundaries experience the most seismic activity?  
+
+## Primary Dataset: USGS Earthquake Catalog API (https://earthquake.usgs.gov/fdsnws/event/1)
+## Description: This dataset provides real-time and historical data on global earthquake events.
+
 Solution architecture
 alt text
 Python :
