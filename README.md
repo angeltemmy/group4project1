@@ -50,15 +50,15 @@ These are supported by 2 docker containers, along with a 3rd container for the P
 
 ### Python :
 
-** For extracting data from both live sources.
-** Loading data to postgres database.
-** Setting up scheduled refreshes.
+* For extracting data from both live sources.
+* Loading data to postgres database.
+* Setting up scheduled refreshes.
 
 ### PostgreSQL DBMS:
-** Stores the live data and associated transformations
+* Stores the live data and associated transformations
 
 ### AWS RDS (if needed):
-** Hosts and manages postgres database.
+* Hosts and manages postgres database.
 
 ### Other tools used:
 
