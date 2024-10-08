@@ -61,11 +61,10 @@ These are supported by 2 docker containers, along with a 3rd container for the P
 * Hosts and manages postgres database.
 
 ### Other tools used:
-
-Docker: containerized pipelines and database.
-ECR: hosts the docker containers -optional.
-ECS: runs the docker containers -optional.
-S3: stroing the .env file -optional.
+* Docker: containerized pipelines and database.
+* ECR: hosts the docker containers -optional.
+* ECS: runs the docker containers -optional.
+* S3: stroing the .env file -optional.
 
 
 ## On-Prem Installation Instructions
