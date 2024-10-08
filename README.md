@@ -1,4 +1,6 @@
 
+#Group4project1 - USGS Earthquakes API Ingestion and Transformation
+
 ## Objective
 
 The objective of this project is to create a data pipeline solution that is capable of looking up accurate real-time and historical data about earthquake events globally.
@@ -36,20 +38,14 @@ These are supported by 2 docker containers, along with a 3rd container for the P
 
 
 ## Installation Instructions
+
 ### 1. Install PostgreSQL and Python
-Download PostgreSQL and pgAdmin by going to https://www.postgresql.org/download/ and selecting the installer for your Operating System. Download the latest version of PostgreSQL.
-2. Clone Codes
-Clone the github repository or manually download it.
-3. Create .env file to store authentication information
-Create an .env file in the main directory with the following format:
-DB information
-LOGGING_SERVER_NAME =  
-LOGGING_DATABASE_NAME =  
-LOGGING_USERNAME =  
-LOGGING_PASSWORD =  
-LOGGING_PORT =
-Run pipeline
-Once the previous steps are done, run the pipeline with python.
+  Download PostgreSQL and pgAdmin by going to https://www.postgresql.org/download/ and selecting the installer for your Operating System. Download the latest version of PostgreSQL.
+### 2. Clone the repo
+  Clone the github repository or manually download it.
+### 3. after navgatio to the dicrectory containing the docker-compose file, run 
+<docker compose up>
+  
 AWS Screenshots  
 We use Docker to contain the pipeline, then load it into AWS ECR, and run on ECS.
 AWS ECR
