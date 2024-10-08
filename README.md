@@ -46,27 +46,29 @@ Description: This dataset provides real-time and historical data on global earth
 This data solution is based on an ingestion and trasnformation pipeline. 
 These are supported by 2 docker containers, along with a 3rd container for the Postgres database which houses the ingestion results and subsequent transformations.
 
-# Python :
+## Underlying Architecture
 
-Extracting data from both live and static source.
-Load data to postgres database.
-Setting automatical refreshing.
+### Python :
 
-# PostgreSQL DBMS:
-Storing live data
+** For extracting data from both live sources.
+** Loading data to postgres database.
+** Setting up scheduled refreshes.
 
-# AWS RDS:
-Hosting and managing postgres database.
+### PostgreSQL DBMS:
+** Stores the live data and associated transformations
 
-# Others:
+### AWS RDS (if needed):
+** Hosts and manages postgres database.
 
-Docker: containerizzing our pipeline.
-ECR: hosting our docker container.
-ECS: running the docker container.
-S3: stroing the .env file.
+### Other tools used:
+
+Docker: containerized pipelines and database.
+ECR: hosts the docker containers -optional.
+ECS: runs the docker containers -optional.
+S3: stroing the .env file -optional.
 
 
-## Installation Instructions
+## On-Prem Installation Instructions
 
 ### 1. Install PostgreSQL and Python
   Download PostgreSQL and pgAdmin by going to https://www.postgresql.org/download/ and selecting the installer for your Operating System. Download the latest version of PostgreSQL.
