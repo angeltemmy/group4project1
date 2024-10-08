@@ -1,12 +1,17 @@
-group4project1
-Project plan
-Objective
-The objective of this project is to create a data pipeline solution that is capable of looking up accurate real-time and historical data about earthquake events globally. This data includes information such as event magnitude, location (latitude/longitude), depth, time of occurrence, and other seismic event attributes. The goal of this project is to build a robust ETL (Extract, Transform, Load) pipeline to facilitate seamless integration, processing, and analysis of this earthquake data for research, monitoring, and risk assessment.
-Earthquake API (https://earthquake.usgs.gov/fdsnws/event/1)
-Consumers
+
+## Objective
+
+The objective of this project is to create a data pipeline solution that is capable of looking up accurate real-time and historical data about earthquake events globally.
+
+This data includes information such as event magnitude, location (latitude/longitude), depth, time of occurrence, and other seismic event attributes. 
+
+The goal of this project is to build a robust ETL (Extract, Transform, Load) pipeline to facilitate seamless integration, processing, and analysis of this earthquake data for research, monitoring, and risk assessment.
+
+## Consumers
+
 Users who would find our datasets useful include:
-Seismologists and Geologists:
-Use Case: Analyze seismic activity patterns, study tectonic plate movements, and develop models to predict earthquake behavior.
+*  Seismologists and Geologists:
+*  *  Use Case: Analyze seismic activity patterns, study tectonic plate movements, and develop models to predict earthquake behavior.
 Disaster Management Agencies:
 Use Case: Monitor real-time earthquake events to coordinate emergency responses and disaster relief efforts.
 Urban Planners and Engineers:
