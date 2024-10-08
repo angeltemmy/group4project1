@@ -124,3 +124,19 @@ Screenshot of task running:
 ## Breakdown of tasks
 
 ![alt text](image-4.png)
+
+
+## Solution architecture
+This data solution is based on an ingestion and trasnformation pipeline. 
+These are supported by 2 docker containers, along with a 3rd container for the Postgres database which houses the ingestion results and subsequent transformations.
+
+
+## Installation Instructions
+
+### 1. Install PostgreSQL and Python
+  Download PostgreSQL and pgAdmin by going to https://www.postgresql.org/download/ and selecting the installer for your Operating System. Download the latest version of PostgreSQL.
+### 2. Clone the repo
+  Clone the github repository or manually download it.
+### 3. After navigating to the directory containing the docker-compose.yml file, run the following command in terminal: 
+```docker compose up```
+  
