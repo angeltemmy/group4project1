@@ -11,7 +11,7 @@ The goal of this project is to build a robust ETL (Extract, Transform, Load) pip
 
 Users who would find our datasets useful include:
 *  Seismologists and Geologists:
-*  *  Use Case: Analyze seismic activity patterns, study tectonic plate movements, and develop models to predict earthquake behavior.
+  **  Use Case: Analyze seismic activity patterns, study tectonic plate movements, and develop models to predict earthquake behavior.
 Disaster Management Agencies:
 Use Case: Monitor real-time earthquake events to coordinate emergency responses and disaster relief efforts.
 Urban Planners and Engineers:
