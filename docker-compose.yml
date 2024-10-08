@@ -1,0 +1,21 @@
+version: "3"
+services: 
+  postgres: 
+    image: postgres:14
+    container_name: postgres
+    env_file:
+      - .env
+    ports: 
+      - 5433:5432
+  ingestion:
+    image: ingestion:1.0
+    depends_on: 
+      - postgres
+    env_file:
+      - .env
+  transformation:
+    image: transformation:1.0
+    depends_on: 
+      - ingestion
+    env_file:
+      - .env

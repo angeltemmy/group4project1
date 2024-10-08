@@ -1,0 +1,8 @@
+name: earthquakes
+config: 
+  extract_template_path: "./etl_project/assets/sql/extract/earthquakes"
+  transform_template_path: "./etl_project/assets/sql/transform/earthquakes"
+  log_folder_path: "./etl_project/logs"
+schedule:
+  run_seconds: 5
+  poll_seconds: 60

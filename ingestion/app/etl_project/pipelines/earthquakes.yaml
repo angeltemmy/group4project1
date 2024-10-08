@@ -1,0 +1,12 @@
+name: earthquakes
+config:
+  base_url: "https://earthquake.usgs.gov/fdsnws/event/1/query" 
+  log_folder_path: "./etl_project/logs"
+  start_time: "2021-01-20"
+  end_time: "2021-01-27"
+  layer_name: "features"
+  method: "geojson"
+  table_name: "earthquake"
+schedule:
+  run_seconds: 5
+  poll_seconds: 2
