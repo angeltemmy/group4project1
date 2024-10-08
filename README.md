@@ -1,5 +1,5 @@
 
-#Group4project1 - USGS Earthquakes API Ingestion and Transformation
+# Group4project1 - USGS Earthquakes API Ingestion and Transformation
 
 ## Objective
 
