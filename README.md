@@ -10,23 +10,17 @@ The goal of this project is to build a robust ETL (Extract, Transform, Load) pip
 ## Consumers
 
 Users who would find our datasets useful include:
-*  Seismologists and Geologists:
-  **  Use Case: Analyze seismic activity patterns, study tectonic plate movements, and develop models to predict earthquake behavior.
-Disaster Management Agencies:
-Use Case: Monitor real-time earthquake events to coordinate emergency responses and disaster relief efforts.
-Urban Planners and Engineers:
-Use Case: Evaluate seismic risk when planning infrastructure projects, construction standards, and building codes.
-Insurance Companies and Risk Assessors:
-Use Case: Assess earthquake risk in specific regions to model potential losses and calculate insurance premiums.
-Government and Regulatory Bodies:
-Use Case: Monitor seismic activity for regulatory compliance and safety standards.
-Academic and Research Institutions:
-Use Case: Conduct research on seismic phenomena, geophysics, and earth sciences.
-Utility Companies:
-Use Case: Assess risk to critical infrastructure such as power plants, water facilities, and pipelines.
-Journalists and Media Organizations:
-Use Case: Report on recent earthquake events, trends, and risk analysis.  
-Value: Access to real-time and historical data enables accurate reporting and public education.
+*  Seismologists and Geologists: To Analyze seismic activity patterns, study tectonic plate movements, and develop models to predict earthquake behavior.
+*  Disaster Management Agencies: To Monitor real-time earthquake events to coordinate emergency responses and disaster relief efforts.
+*  Urban Planners and Engineers: To Evaluate seismic risk when planning infrastructure projects, construction standards, and building codes.
+*  Insurance Companies and Risk Assessors: Use Case: Assess earthquake risk in specific regions to model potential losses and calculate insurance premiums.
+*  Government and Regulatory Bodies: To Monitor seismic activity for regulatory compliance and safety standards.
+*  Academic and Research Institutions: To Conduct research on seismic phenomena, geophysics, and earth sciences.
+*  Utility Companies: To Assess risk to critical infrastructure such as power plants, water facilities, and pipelines.
+
+## Value: 
+
+Access to real-time and historical data enables accurate reporting and public education.
 • Access: Typically through database or BI dashboards
 Questions
 Our data addresses questions like
