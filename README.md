@@ -29,25 +29,14 @@ Access to real-time and historical data enables accurate reporting and public ed
 *  Which tectonic plate boundaries experience the most seismic activity?  
 
 ## Primary Dataset: USGS Earthquake Catalog API (https://earthquake.usgs.gov/fdsnws/event/1)
-## Description: This dataset provides real-time and historical data on global earthquake events.
 
-Solution architecture
-alt text
-Python :
-Extracting data from both live and static source.  
-Load data to postgres database.  
-Setting automatical refreshing.
-PostgreSQL DBMS:
-Storing live data
-AWS RDS:
-Hosting and managing postgres database.
-Others:
-Docker: containerizzing our pipeline.  
-ECR: hosting our docker container.  
-ECS: running the docker container.  
-S3: stroing the .env file.
-Installation Instructions
-1. Install PostgreSQL and Python
+## Solution architecture
+This data solution is based on an ingestion and trasnformation pipeline. 
+These are supported by 2 docker containers, along with a 3rd container for the Postgres database which houses the ingestion results and subsequent transformations.
+
+
+## Installation Instructions
+### 1. Install PostgreSQL and Python
 Download PostgreSQL and pgAdmin by going to https://www.postgresql.org/download/ and selecting the installer for your Operating System. Download the latest version of PostgreSQL.
 2. Clone Codes
 Clone the github repository or manually download it.
