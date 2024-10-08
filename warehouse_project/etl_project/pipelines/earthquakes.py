@@ -1,19 +1,24 @@
+# Envioroment Imports
 from jinja2 import Environment, FileSystemLoader
-from etl_project.connectors.postgresql import PostgreSqlClient
 from dotenv import load_dotenv
 import os
+from graphlib import TopologicalSorter
+from pathlib import Path
+import schedule
+import time
+import yaml
+
+# Project Imports
+from etl_project.connectors.postgresql import PostgreSqlClient
+from etl_project.assets.pipeline_logging import PipelineLogging
+from etl_project.assets.metadata_logging import MetaDataLogging, MetaDataLoggingStatus
 from etl_project.assets.extract_load_transform import (
     extract_load,
     transform,
     SqlTransform,
 )
-from graphlib import TopologicalSorter
-from etl_project.assets.pipeline_logging import PipelineLogging
-from etl_project.assets.metadata_logging import MetaDataLogging, MetaDataLoggingStatus
-from pathlib import Path
-import schedule
-import time
-import yaml
+
+
 
 
 def run_pipeline(pipeline_config: dict, postgresql_logging_client: PostgreSqlClient):
@@ -26,6 +31,8 @@ def run_pipeline(pipeline_config: dict, postgresql_logging_client: PostgreSqlCli
         pipeline_name=pipeline_config.get("name"),
         log_folder_path=pipeline_config.get("config").get("log_folder_path"),
     )
+    
+
 
     SOURCE_DATABASE_NAME = os.environ.get("SOURCE_DATABASE_NAME")
     SOURCE_SERVER_NAME = os.environ.get("SOURCE_SERVER_NAME")
@@ -37,8 +44,10 @@ def run_pipeline(pipeline_config: dict, postgresql_logging_client: PostgreSqlCli
     TARGET_DB_USERNAME = os.environ.get("TARGET_DB_USERNAME")
     TARGET_DB_PASSWORD = os.environ.get("TARGET_DB_PASSWORD")
     TARGET_PORT = os.environ.get("TARGET_PORT")
+
     try:
-        metadata_logging.log()  # start run
+        print("here")
+        metadata_logging.log()
         pipeline_logging.logger.info("Creating source client")
         source_postgresql_client = PostgreSqlClient(
             server_name=SOURCE_SERVER_NAME,
@@ -55,7 +64,6 @@ def run_pipeline(pipeline_config: dict, postgresql_logging_client: PostgreSqlCli
             password=TARGET_DB_PASSWORD,
             port=TARGET_PORT,
         )
-
         extract_template_environment = Environment(
             loader=FileSystemLoader(
                 pipeline_config.get("config").get("extract_template_path")
@@ -67,29 +75,22 @@ def run_pipeline(pipeline_config: dict, postgresql_logging_client: PostgreSqlCli
             source_postgresql_client=source_postgresql_client,
             target_postgresql_client=target_postgresql_client,
         )
-
+        print("here 76")
         transform_template_environment = Environment(
             loader=FileSystemLoader(
                 pipeline_config.get("config").get("transform_template_path")
             )
         )
-
         # create nodes
-        serving_sales_cumulative = SqlTransform(
-            table_name="serving_sales_cumulative",
+        earthquake_regions = SqlTransform(
+            table_name="earthquake_regions",
             postgresql_client=target_postgresql_client,
             environment=transform_template_environment,
         )
-        serving_sales_month_end = SqlTransform(
-            table_name="serving_sales_month_end",
-            postgresql_client=target_postgresql_client,
-            environment=transform_template_environment,
-        )
-
         # create DAG
         dag = TopologicalSorter()
-        dag.add(serving_sales_cumulative)
-        dag.add( serving_sales_cumulative, serving_sales_month_end)
+        dag.add(earthquake_regions)
+        # dag.add( serving_sales_cumulative, serving_sales_month_end)
         # run transform
         pipeline_logging.logger.info("Perform transform")
         transform(dag=dag)
@@ -131,7 +132,7 @@ if __name__ == "__main__":
         raise Exception(
             f"Missing {yaml_file_path} file! Please create the yaml file with at least a `name` key for the pipeline name."
         )
-
+    
     # set schedule
     schedule.every(pipeline_config.get("schedule").get("run_seconds")).seconds.do(
         run_pipeline,
@@ -142,3 +143,8 @@ if __name__ == "__main__":
     while True:
         schedule.run_pending()
         time.sleep(pipeline_config.get("schedule").get("poll_seconds"))
+
+
+
+
+

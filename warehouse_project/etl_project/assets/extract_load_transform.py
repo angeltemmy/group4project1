@@ -19,6 +19,7 @@ def extract_load(
     """
     for asset in template_environment.list_templates():
         sql_extract_parser = SqlExtractParser(
+            
             file_path=asset, environment=template_environment
         )
         database_table_extractor = DatabaseTableExtractor(

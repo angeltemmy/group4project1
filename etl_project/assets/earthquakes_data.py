@@ -11,7 +11,7 @@ def extract_earthquakes_data(
     earthquakes_client: EarthquakesApiClient,
     start_time: str,
     end_time: str,
-    #layer_name: str
+    layer_name: str
 ) -> pd.DataFrame:
     """
     Perform extraction using a filepath which contains a list of cities.
@@ -23,7 +23,7 @@ def extract_earthquakes_data(
             earthquakes_client.get_data(
                 start_time=start_time,
                 end_time=end_time,
-                #layer_name=layer_name
+                layer_name=layer_name
             )
         )
 
@@ -33,7 +33,7 @@ def extract_earthquakes_data(
 
 """Performs transformation on dataframe produced from extract() function."""
 
-def transform(df: pd.DataFrame, df_exchange_codes: pd.DataFrame) -> pd.DataFrame:
+def transform(df: pd.DataFrame) -> pd.DataFrame:
     """Performs transformation on dataframe produced from extract() function."""
     df =df[['type','id','properties.mag','properties.time','properties.updated','geometry.type',
                              'properties.magType','properties.gap','properties.rms','properties.dmin','properties.nst',
@@ -50,9 +50,9 @@ def transform(df: pd.DataFrame, df_exchange_codes: pd.DataFrame) -> pd.DataFrame
     df=df.drop(["properties_place"],axis=1)
     
     df=df.rename(columns={'properties_time':"timestamp", 
-              'properties_updated':"timestamp_updated",
+        'properties_updated':"timestamp_updated",
        'properties_place':"place",
-         'geometry_coordinates':"coordinates", 
+        'geometry_coordinates':"coordinates", 
        'properties_title':"title",
        "properties_mag":"Magnitude",
        "properties_magType":"MagnitudeType",

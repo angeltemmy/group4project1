@@ -75,6 +75,7 @@ class DatabaseTableExtractor:
             from {self.sql_extract_parser.config.source_table_name}
         """
         sql_response = self.target_postgresql_client.run_sql(sql)
+        print(sql_response[0].get("incremental_value"))
         return sql_response[0].get("incremental_value")
 
     def _incremental_extract(self) -> list[dict]:
