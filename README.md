@@ -64,24 +64,63 @@ Description: This dataset provides real-time and historical data on global earth
 
 ## Solution architecture
 
-How are we going to get data flowing from source to serving? What components and services will we combine to implement the solution? How do we automate the entire running of the solution?
+![alt text](<Untitled Diagram.drawio.png>)
 
-- What data extraction patterns are you going to be using?
-- What data loading patterns are you going to be using?
-- What data transformation patterns are you going to be performing?
 
-We recommend using a diagramming tool like [draw.io](https://draw.io/) to create your architecture diagram.
+# Python :
 
-Here is a sample solution architecture diagram:
+Extracting data from both live and static source.
+Load data to postgres database.
+Setting automatical refreshing.
 
-![images/sample-solution-architecture-diagram.png](images/sample-solution-architecture-diagram.png)
+# PostgreSQL DBMS:
+Storing live data
+
+# AWS RDS:
+Hosting and managing postgres database.
+
+# Others:
+
+Docker: containerizzing our pipeline.
+ECR: hosting our docker container.
+ECS: running the docker container.
+S3: stroing the .env file.
+
+
+## Installation Instructions
+# 1. Install PostgreSQL and Python
+Download PostgreSQL and pgAdmin by going to https://www.postgresql.org/download/ and selecting the installer for your Operating System. Download the latest version of PostgreSQL.
+
+# 2. Clone Codes
+Clone the github repository or manually download it.
+
+# 3. Create .env file to store authentication information
+Create an .env file in the main directory with the following format:
+
+# DB information
+LOGGING_SERVER_NAME = <postgresql db username>
+LOGGING_DATABASE_NAME = <name of db>
+LOGGING_USERNAME = <servername>
+LOGGING_PASSWORD = <postgresql db password>
+LOGGING_PORT = <port> 
+# Run pipeline
+Once the previous steps are done, run the pipeline with python.
+
+AWS Screenshots
+We use Docker to contain the pipeline, then load it into AWS ECR, and run on ECS.
+
+AWS ECR 
+
+![alt text](image-1.png)
+
+AWS ECS
+Screenshot of task running:
+
+![alt text](image-2.png)
+
+# AWS RDS screenshot
+![alt text](image-3.png)
 
 ## Breakdown of tasks
 
-How is your project broken down? Who is doing what?
-
-We recommend using a free Task board such as [Trello](https://trello.com/). This makes it easy to assign and track tasks to each individual.
-
-Example:
-
-![images/kanban-task-board.png](images/kanban-task-board.png)
+![alt text](image-4.png)
