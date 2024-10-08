@@ -91,9 +91,48 @@ def run_pipeline(pipeline_config: dict, postgresql_logging_client: PostgreSqlCli
             postgresql_client=target_postgresql_client,
             environment=transform_template_environment,
         )
+
+        avg_mag_region = SqlTransform(
+            table_name="avg_mag_region",
+            postgresql_client=target_postgresql_client,
+            environment=transform_template_environment,
+        )
+        
+        avg_max_min_mag_region = SqlTransform(
+            table_name="avg_max_min_mag_region",
+            postgresql_client=target_postgresql_client,
+            environment=transform_template_environment,
+        )
+
+        earthquakes_for_place = SqlTransform(
+            table_name="earthquakes_for_place",
+            postgresql_client=target_postgresql_client,
+            environment=transform_template_environment,
+        )
+
+        max_mag_region = SqlTransform(
+            table_name="max_mag_region",
+            postgresql_client=target_postgresql_client,
+            environment=transform_template_environment,
+        )
+
+        region_more_earthquakes = SqlTransform(
+            table_name="region_more_earthquakes",
+            postgresql_client=target_postgresql_client,
+            environment=transform_template_environment,
+        )
+
+
         # create DAG
         dag = TopologicalSorter()
         dag.add(earthquake_regions, transformation_load_earthquakes)
+        dag.add(avg_mag_region)
+        dag.add(avg_max_min_mag_region)
+        dag.add(earthquakes_for_place)
+        dag.add(max_mag_region)
+        dag.add(region_more_earthquakes)
+
+
         # dag.add( serving_sales_cumulative, serving_sales_month_end)
         # run transform
         pipeline_logging.logger.info("Perform transform")
