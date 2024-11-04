@@ -95,5 +95,6 @@ Screenshot of task running:
 ## Breakdown of tasks
 
 ![alt text](image-4.png)
+.
 
 
